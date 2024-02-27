@@ -17,11 +17,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Web application for creating redirection page with styling, blog functionality and project viewing
  */
 @SpringBootApplication
-@EnableVaadin("{com.jakubwawak}")
+@EnableVaadin({"com.jakubwawak"})
 public class RedirectApplication {
 
 	public static String version = "v1.0.0";
-	public static String build = "red200224REV01irect";
+	public static String build = "red2690224REV01irect";
 
 	public static int debug = 0;
 
@@ -49,7 +49,6 @@ public class RedirectApplication {
 				properties = new Properties("redirect.properties");
 				if (properties.fileExists){ // check if properties file exists
 					properties.parsePropertiesFile(); // parse the file
-
 					if ( properties.integrityFlag ){
 						// file integrity correct
 						logger.addLog("INTEGRITY","File integrity correct!");
@@ -57,6 +56,9 @@ public class RedirectApplication {
 						// run the server + frontend
 						logger.addLog("INTEGRITY","Properties loaded correctly!");
 						SpringApplication.run(RedirectApplication.class, args);
+					}
+					else{
+						logger.addLog("INTEGRITY-FAILED","Failed to check integrity of the file!");
 					}
 				}
 				else {

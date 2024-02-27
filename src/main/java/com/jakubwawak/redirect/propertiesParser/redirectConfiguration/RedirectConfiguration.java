@@ -107,7 +107,7 @@ public class RedirectConfiguration {
         if ( !iconPath.equals("")) {
             return iconPath;
         }
-        return ""; //TODO add path to icon in resources
+        return "images/redirect_icon.png";
     }
 
     public String getProjectsFlag() {
@@ -219,27 +219,53 @@ public class RedirectConfiguration {
         if ( !mainPageBackgroundStyle.equals(""))
             return mainPageBackgroundStyle;
         else
-            return "";
+            return "radial-gradient(blue,black)";
     }
 
     public String getMainPageFontColor() {
         if ( !mainPageFontColor.equals(""))
             return mainPageFontColor;
         else
-            return "";
+            return "#000000";
     }
 
     public String getMainPageFontStyle() {
         if ( !mainPageFontStyle.equals(""))
             return mainPageFontStyle;
         else
-            return "";
+            return "Monospace";
     }
 
     public String getMainPageButtonStyle() {
         if ( !mainPageButtonStyle.equals(""))
             return mainPageButtonStyle;
         else
-            return "";
+            return "#FFFFFF";
+    }
+
+    /**
+     * Function for getting contrast color to given one
+     * @param hexColor
+     * @return
+     */
+    public String getContrastColor(String hexColor) {
+        // Remove the "#" symbol from the hex code if present
+        hexColor = hexColor.replace("#","");
+
+        // Check if the hex code is valid (6 characters)
+        if (hexColor.length() != 6) {
+            throw new IllegalArgumentException("Invalid hex color code. Please provide a 6-character hex code.");
+        }
+
+        // Convert the hex code to RGB values
+        int r = Integer.parseInt(hexColor.substring(0, 2), 16);
+        int g = Integer.parseInt(hexColor.substring(2, 4), 16);
+        int b = Integer.parseInt(hexColor.substring(4, 6), 16);
+
+        // Calculate the relative luminance
+        double y = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+        // Determine the contrasting color based on relative luminance
+        return (y > 0.5) ? "#000000" : "#FFFFFF";
     }
 }

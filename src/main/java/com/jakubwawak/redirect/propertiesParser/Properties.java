@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Properties {
 
-    int INTEGRITY_CHECK_FLAG = 19;
+    int INTEGRITY_CHECK_FLAG = 23;
     String EXPECTED_FILEVERSION = "1";
 
     String propertiesFile;
@@ -53,7 +53,7 @@ public class Properties {
      */
     public String getValue(String key){
         for( PropertiesField pf : propertiesCollection ){
-            if ( pf.propertiesKey.equals(key)){
+            if ( pf.propertiesKey.contains(key)){
                 return pf.propertiesValue;
             }
         }
