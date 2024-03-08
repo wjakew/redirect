@@ -66,18 +66,8 @@ public class HomeView extends VerticalLayout {
         iconImage.setWidth("5rem");
 
         blogButton = new Button("Blog", VaadinIcon.BOOK.create());
-        blogButton.getStyle().set("background-color",redirectConfiguration.getMainPageButtonStyle());
-        blogButton.getStyle().set("color",redirectConfiguration.getContrastColor(redirectConfiguration.getMainPageButtonStyle()));
-        blogButton.getElement().getStyle().set("font-family",redirectConfiguration.getMainPageFontStyle());
-        blogButton.getStyle().set("border-radius","25px");
-        blogButton.setHeight("5rem");
 
         projectsButton = new Button("Projects",VaadinIcon.PAINT_ROLL.create());
-        projectsButton.getStyle().set("background-color",redirectConfiguration.getMainPageButtonStyle());
-        projectsButton.getStyle().set("color",redirectConfiguration.getContrastColor(redirectConfiguration.getMainPageButtonStyle()));
-        projectsButton.getElement().getStyle().set("font-family",redirectConfiguration.getMainPageFontStyle());
-        projectsButton.getStyle().set("border-radius","25px");
-        projectsButton.setHeight("5rem");
 
         headerLayout = new HorizontalLayout();
 
@@ -109,13 +99,8 @@ public class HomeView extends VerticalLayout {
         headerLayout.add(left_layout,center_layout,right_layout);
 
         pagetitleHeader = new H1();
-        pagetitleHeader.getElement().getStyle().set("font-family",redirectConfiguration.getMainPageFontStyle());
-        pagetitleHeader.getElement().getStyle().set("font-size","10rem");
-        pagetitleHeader.getElement().getStyle().set("word-wrap","break-word");
 
         pagetitleDesc = new H6();
-        pagetitleDesc.getElement().getStyle().set("font-family",redirectConfiguration.getMainPageFontStyle());
-        pagetitleDesc.getElement().getStyle().set("word-wrap","break-word");
     }
 
     /**
@@ -139,9 +124,6 @@ public class HomeView extends VerticalLayout {
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
-        getStyle().set("color",redirectConfiguration.getMainPageFontColor());
-        getStyle().set("background-image",redirectConfiguration.getMainPageBackgroundStyle());
-        getStyle().set("--lumo-font-family",redirectConfiguration.getMainPageFontStyle());
     }
 
 }

@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RedirectApplication {
 
 	public static String version = "v1.0.0";
-	public static String build = "red2690224REV01irect";
+	public static String build = "red080324REV01irect";
 
 	public static int debug = 0;
 

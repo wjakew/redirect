@@ -161,11 +161,7 @@ public class Properties {
             writer.write("$databasePassword=\n");
             writer.write("#-------------------------------------------------------------\n");
             writer.write("# styling data\n");
-            writer.write("# values for changing styles on the website\n");
-            writer.write("$mainPageBackgroundStyle=\n");
-            writer.write("$mainPageFontColor=\n");
-            writer.write("$mainPageFontStyle=\n");
-            writer.write("$mainPageButtonStyle=\n");
+            writer.write("to style the webpage change css data in frontend -> style folders\n");
             writer.close();
         }catch(Exception ex){
             error = true;
