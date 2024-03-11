@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Properties {
 
-    int INTEGRITY_CHECK_FLAG = 23;
+    int INTEGRITY_CHECK_FLAG = 19;
     String EXPECTED_FILEVERSION = "1";
 
     String propertiesFile;

@@ -1,0 +1,17 @@
+html{
+ --lumo-primary-color:green;
+ --lumo-font-family: "Roboto";
+ --background-color: black;
+}
+vaadin-button {
+  --lumo-font-family: 'Roboto';
+}
+vaadin-button.redirectbtn{
+    --lumo-primary-text-color: white;
+}
+H1 .header{
+    --font-color: green;
+}
+H6 .desc{
+    --font-color: green;
+}

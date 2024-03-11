@@ -32,6 +32,8 @@ public class HomeView extends VerticalLayout {
 
     // upper header layout
     private HorizontalLayout headerLayout;
+    private VerticalLayout mainLayout;
+    private HorizontalLayout footerLayout;
     private Image iconImage;
     private Button blogButton;
     private Button projectsButton;
@@ -66,8 +68,9 @@ public class HomeView extends VerticalLayout {
         iconImage.setWidth("5rem");
 
         blogButton = new Button("Blog", VaadinIcon.BOOK.create());
-
+        blogButton.addClassName("redirectbtn");
         projectsButton = new Button("Projects",VaadinIcon.PAINT_ROLL.create());
+        projectsButton.addClassName("redirectbtn");
 
         headerLayout = new HorizontalLayout();
 
@@ -99,8 +102,24 @@ public class HomeView extends VerticalLayout {
         headerLayout.add(left_layout,center_layout,right_layout);
 
         pagetitleHeader = new H1();
+        pagetitleHeader.addClassName("header");
 
         pagetitleDesc = new H6();
+        pagetitleDesc.addClassName("desc");
+
+        mainLayout = new VerticalLayout();
+        mainLayout.setSizeFull();
+        mainLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+        mainLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        mainLayout.getStyle().set("text-align", "center");
+        mainLayout.add(pagetitleHeader,pagetitleDesc);
+
+
+        footerLayout = new HorizontalLayout();
+        footerLayout.setWidthFull();
+        footerLayout.add(new H6("by redirect and "+redirectConfiguration.pageTitleOwner));
+        footerLayout.setAlignItems(Alignment.CENTER);
+        footerLayout.setVerticalComponentAlignment(Alignment.CENTER);
     }
 
     /**
@@ -117,8 +136,8 @@ public class HomeView extends VerticalLayout {
     public void reloadLayout(){
         reloadComponents();
         add(headerLayout);
-        add(pagetitleHeader);
-        add(pagetitleDesc);
+        add(mainLayout);
+        add(footerLayout);
 
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);

@@ -9,7 +9,10 @@ import com.jakubwawak.redirect.maintanance.ConsoleColors;
 import com.jakubwawak.redirect.maintanance.JWALog;
 import com.jakubwawak.redirect.propertiesParser.Properties;
 import com.jakubwawak.redirect.propertiesParser.redirectConfiguration.RedirectConfiguration;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.spring.annotation.EnableVaadin;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -18,10 +21,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableVaadin({"com.jakubwawak"})
-public class RedirectApplication {
+@Theme(value="redirectheme")
+public class RedirectApplication implements AppShellConfigurator {
 
 	public static String version = "v1.0.0";
-	public static String build = "red080324REV01irect";
+	public static String build = "red110324REV01irect";
 
 	public static int debug = 0;
 
@@ -68,7 +72,7 @@ public class RedirectApplication {
 			}
 		}
 		else{
-
+			// TODO create a menu section for creating or changing the .properties file
 		}
 
 	}
