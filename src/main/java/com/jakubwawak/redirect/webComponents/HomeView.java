@@ -101,6 +101,20 @@ public class HomeView extends VerticalLayout {
 
         headerLayout.add(left_layout,center_layout,right_layout);
 
+        // setting buttons visiblity
+        if ( redirectConfiguration.blogFlag.equals("1") ){
+            blogButton.setVisible(true);
+        }
+        else{
+            blogButton.setVisible(false);
+        }
+        if ( redirectConfiguration.projectsFlag.equals("1")){
+            projectsButton.setVisible(true);
+        }
+        else{
+            projectsButton.setVisible(false);
+        }
+
         pagetitleHeader = new H1();
         pagetitleHeader.addClassName("header");
 
@@ -120,6 +134,7 @@ public class HomeView extends VerticalLayout {
         footerLayout.add(new H6("by redirect and "+redirectConfiguration.pageTitleOwner));
         footerLayout.setAlignItems(Alignment.CENTER);
         footerLayout.setVerticalComponentAlignment(Alignment.CENTER);
+        footerLayout.addClassName("footer");
     }
 
     /**

@@ -25,7 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RedirectApplication implements AppShellConfigurator {
 
 	public static String version = "v1.0.0";
-	public static String build = "red110324REV01irect";
+	public static String build = "red120324REV01irect";
 
 	public static int debug = 0;
 
