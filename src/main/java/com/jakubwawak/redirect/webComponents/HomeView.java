@@ -51,7 +51,7 @@ public class HomeView extends VerticalLayout {
      */
     public HomeView(){
         this.redirectConfiguration = RedirectApplication.redirectConfiguration;
-        this.getElement().setAttribute("theme", Lumo.DARK);
+        addClassName("homeview");
         prepareComponents();
         reloadLayout();
     }

@@ -1,21 +1,41 @@
 html{
- --lumo-primary-color:green;
- --lumo-font-family: BlinkMacSystemFont;
- --background-color: black;
+    /* style for whole web application */
+    --lumo-primary-color:green;
+    overflow: hidden;
+}
+.homeview{
+    /* style for main page with headers and buttons /home */
+    background-color: black;
+    color: white;
+}
+.homeview H1{
+    /* page main header text style */
+    color: white;
+    font-family: Monospace;
+}
+.homeview H6{
+    /* page main description style */
+    color: white;
+    font-family: Monospace;
+}
+.redirectbtn{
+    /* style for application header buttons*/
+    background-color: black;
+    color: white;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+}
+.redirectbtn-links{
+    /* style for application link buttons on the main screen */
+
 }
 vaadin-button {
-  --lumo-font-family: BlinkMacSystemFont;
-}
-vaadin-button.redirectbtn{
-    --lumo-primary-text-color: white;
-}
-.header{
-    font-color: green;
-}
-.desc{
-    font-color: green;
+    /* styles for application redirect buttons */
+    font-family: Monospace;
 }
 .footer{
+    /* style for lower footer */
     position: relative;
-    left: 40%
+    left: 43%
 }

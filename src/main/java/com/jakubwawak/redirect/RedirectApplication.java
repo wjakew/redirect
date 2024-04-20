@@ -15,6 +15,7 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
  * Web application for creating redirection page with styling, blog functionality and project viewing
@@ -22,10 +23,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableVaadin({"com.jakubwawak"})
 @Theme(value="redirectheme")
-public class RedirectApplication implements AppShellConfigurator {
+public class RedirectApplication extends SpringBootServletInitializer implements AppShellConfigurator{
 
 	public static String version = "v1.0.0";
-	public static String build = "red120324REV01irect";
+	public static String build = "red200424REV01emmet";
 
 	public static int debug = 0;
 
