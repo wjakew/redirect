@@ -28,7 +28,11 @@ html{
 }
 .redirectbtn-links{
     /* style for application link buttons on the main screen */
-
+    background-color: black;
+    color: white;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
 }
 vaadin-button {
     /* styles for application redirect buttons */

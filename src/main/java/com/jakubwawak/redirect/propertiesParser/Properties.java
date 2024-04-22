@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Properties {
 
-    int INTEGRITY_CHECK_FLAG = 19;
+    int INTEGRITY_CHECK_FLAG = 15;
     String EXPECTED_FILEVERSION = "1";
 
     String propertiesFile;
@@ -148,17 +148,9 @@ public class Properties {
             writer.write("$redirectBtnText2=\n");
             writer.write("$redirectBtnUrl2=\n");
             writer.write("#-----btn3\n");
-            writer.write("$redirectBtnEnableFlag=\n");
+            writer.write("$redirectBtnEnableFlag3=\n");
             writer.write("$redirectBtnText3=\n");
             writer.write("$redirectBtnUrl3=\n");
-            writer.write("#-------------------------------------------------------------\n");
-            writer.write("# database support\n");
-            writer.write("# database connection information for storing project or blog data\n");
-            writer.write("# app supports MySQL or MariDB database\n");
-            writer.write("$databaseIP=\n");
-            writer.write("$databaseName=\n");
-            writer.write("$databaseUser=\n");
-            writer.write("$databasePassword=\n");
             writer.write("#-------------------------------------------------------------\n");
             writer.write("# styling data\n");
             writer.write("to style the webpage change css data in frontend -> style folders\n");

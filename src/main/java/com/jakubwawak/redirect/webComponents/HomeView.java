@@ -7,6 +7,8 @@ package com.jakubwawak.redirect.webComponents;
 
 import com.jakubwawak.redirect.RedirectApplication;
 import com.jakubwawak.redirect.propertiesParser.redirectConfiguration.RedirectConfiguration;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H6;
@@ -21,6 +23,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.theme.lumo.Lumo;
+import org.springframework.web.servlet.tags.form.ButtonTag;
 
 /**
  * Main application web view
@@ -34,9 +37,15 @@ public class HomeView extends VerticalLayout {
     private HorizontalLayout headerLayout;
     private VerticalLayout mainLayout;
     private HorizontalLayout footerLayout;
+    private HorizontalLayout linkbuttonLayout;
+
+    private Button link1_button, link2_button, link3_button;
+
     private Image iconImage;
+
     private Button blogButton;
     private Button projectsButton;
+
     // main headers
     private H1 pagetitleHeader;
     private H6 pagetitleDesc;
@@ -99,6 +108,54 @@ public class HomeView extends VerticalLayout {
         right_layout.add(blogButton,projectsButton);
         right_layout.setWidth("80%");
 
+        // link button layout creator
+        linkbuttonLayout = new HorizontalLayout();
+        linkbuttonLayout.setAlignItems(Alignment.CENTER);
+        linkbuttonLayout.setVerticalComponentAlignment(Alignment.CENTER);
+
+        link1_button = new Button("Link 1"); link1_button.addClassName("redirectbtn-links");
+        link2_button = new Button("Link 2"); link2_button.addClassName("redirectbtn-links");
+        link3_button = new Button("Link 3"); link3_button.addClassName("redirectbtn-links");
+        link1_button.setVisible(false); link2_button.setVisible(false); link3_button.setVisible(false);
+
+        if ( RedirectApplication.properties.getValue("redirectBtnEnableFlag1")!= null){
+            if (!RedirectApplication.properties.getValue("redirectBtnEnableFlag1").isEmpty()) {
+                link1_button.setVisible(true);
+                link1_button.setText(RedirectApplication.properties.getValue("redirectBtnText1"));
+            }
+        }
+        if ( RedirectApplication.properties.getValue("redirectBtnEnableFlag2")!= null){
+            if (!RedirectApplication.properties.getValue("redirectBtnEnableFlag2").isEmpty()) {
+                link2_button.setVisible(true);
+                link2_button.setText(RedirectApplication.properties.getValue("redirectBtnText2"));
+            }
+        }
+        if ( RedirectApplication.properties.getValue("redirectBtnEnableFlag3")!= null){
+            if (!RedirectApplication.properties.getValue("redirectBtnEnableFlag3").isEmpty()) {
+                link3_button.setVisible(true);
+                link3_button.setText(RedirectApplication.properties.getValue("redirectBtnText3"));
+            }
+        }
+
+        ComponentEventListener<ClickEvent<Button>> listener = event -> {
+            Button selectedButton = event.getSource();
+            if (selectedButton.equals(link1_button)){
+                //TODO
+            }
+            if (selectedButton.equals(link2_button)){
+                //TODO
+            }
+            if (selectedButton.equals(link3_button)){
+                //TODO
+            }
+        };
+
+        link1_button.addClickListener(listener);
+        link2_button.addClickListener(listener);
+        link3_button.addClickListener(listener);
+
+        linkbuttonLayout.add(link1_button,link2_button,link3_button);
+
         headerLayout.add(left_layout,center_layout,right_layout);
 
         // setting buttons visiblity
@@ -126,7 +183,7 @@ public class HomeView extends VerticalLayout {
         mainLayout.setJustifyContentMode(JustifyContentMode.CENTER);
         mainLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         mainLayout.getStyle().set("text-align", "center");
-        mainLayout.add(pagetitleHeader,pagetitleDesc);
+        mainLayout.add(pagetitleHeader,pagetitleDesc,linkbuttonLayout);
 
 
         footerLayout = new HorizontalLayout();
@@ -159,5 +216,4 @@ public class HomeView extends VerticalLayout {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
     }
-
 }
