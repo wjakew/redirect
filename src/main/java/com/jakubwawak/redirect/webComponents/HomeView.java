@@ -9,6 +9,7 @@ import com.jakubwawak.redirect.RedirectApplication;
 import com.jakubwawak.redirect.propertiesParser.redirectConfiguration.RedirectConfiguration;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H6;
@@ -140,13 +141,25 @@ public class HomeView extends VerticalLayout {
         ComponentEventListener<ClickEvent<Button>> listener = event -> {
             Button selectedButton = event.getSource();
             if (selectedButton.equals(link1_button)){
-                //TODO
+                if (RedirectApplication.properties.getValue("$redirectBtnUrl1").contains("http") ){
+                    UI.getCurrent().getPage().executeJs("window.open('" + RedirectApplication.properties.getValue("$redirectBtnUrl1") + "', '_blank');");
+                }
+                else
+                    UI.getCurrent().getPage().executeJs("window.open('https://" + RedirectApplication.properties.getValue("$redirectBtnUrl1") + "', '_blank');");
             }
             if (selectedButton.equals(link2_button)){
-                //TODO
+                if (RedirectApplication.properties.getValue("$redirectBtnUrl2").contains("http") ){
+                    UI.getCurrent().getPage().executeJs("window.open('" + RedirectApplication.properties.getValue("$redirectBtnUrl2") + "', '_blank');");
+                }
+                else
+                    UI.getCurrent().getPage().executeJs("window.open('https://" + RedirectApplication.properties.getValue("$redirectBtnUrl2") + "', '_blank');");
             }
             if (selectedButton.equals(link3_button)){
-                //TODO
+                if (RedirectApplication.properties.getValue("$redirectBtnUrl3").contains("http") ){
+                    UI.getCurrent().getPage().executeJs("window.open('" + RedirectApplication.properties.getValue("$redirectBtnUrl3") + "', '_blank');");
+                }
+                else
+                    UI.getCurrent().getPage().executeJs("window.open('https://" + RedirectApplication.properties.getValue("$redirectBtnUrl3") + "', '_blank');");
             }
         };
 

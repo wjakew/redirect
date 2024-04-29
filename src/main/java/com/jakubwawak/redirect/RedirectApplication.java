@@ -35,6 +35,8 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 	public static Properties properties;
 	public static RedirectConfiguration redirectConfiguration;
 
+	public static RedirectMenu menu;
+
 	/**
 	 * Main application function
 	 * @param args
@@ -60,7 +62,9 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 						redirectConfiguration = new RedirectConfiguration(properties);
 						// run the server + frontend
 						logger.addLog("INTEGRITY","Properties loaded correctly!");
+						menu = new RedirectMenu();
 						SpringApplication.run(RedirectApplication.class, args);
+						menu.run();
 					}
 					else{
 						logger.addLog("INTEGRITY-FAILED","Failed to check integrity of the file!");
