@@ -1,3 +1,12 @@
+/*----------------------------------global font */
+@font-face {
+  font-family: primary;
+  src: url("./AntonSC-Regular.ttf");
+}
+@font-face {
+  font-family: secondary;
+  src: url("./Tiny5-Regular.ttf");
+}
 html{
     /* style for whole web application */
     --lumo-primary-color:green;
@@ -11,12 +20,17 @@ html{
 .homeview H1{
     /* page main header text style */
     color: white;
-    font-family: Monospace;
+    font-family: primary;
 }
 .homeview H6{
     /* page main description style */
     color: white;
-    font-family: Monospace;
+    font-family: secondary;
+}
+.homeview H4{
+    /* page main description style */
+    color: white;
+    font-family: secondary;
 }
 .redirectbtn{
     /* style for application header buttons*/
@@ -33,13 +47,32 @@ html{
     border-style: solid;
     border-color: white;
     border-radius: 25px;
+    font-family: secondary;
+}
+.redkrectbtn-links:hover{
+    /* style for application link buttons on the main screen when hovered */
+    background-color: white;
+    color: black;
+    border-style: solid;
+    border-color: black;
+    border-radius: 25px;
+    font-family: secondary;
 }
 vaadin-button {
     /* styles for application redirect buttons */
-    font-family: Monospace;
+    font-family: secondary;
 }
 .footer{
     /* style for lower footer */
     position: relative;
-    left: 43%
+    left: 45%
+}
+.cardlayout{
+    /* style for card layout */
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    border: white 1px solid;
+    width: 40%;
+    height: 60%;
+    border-radius: 25px;
 }

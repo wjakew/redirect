@@ -46,7 +46,36 @@ public class RedirectMenu {
                     }
                     break;
                 }
-                //TODO create basic logic
+                case "debug":
+                {
+                    if ( RedirectApplication.printLogFlag == 1 ){
+                        RedirectApplication.printLogFlag = 0;
+                        System.out.println("Debug mode off");
+                    }
+                    else {
+                        RedirectApplication.printLogFlag = 1;
+                        System.out.println("Debug mode on");
+                    }
+                }
+                case "cardinfomanager":
+                {
+                    if ( words.length == 1 ){
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.print("Enter header:");
+                        String header = scanner.nextLine();
+                        System.out.print("Enter email:");
+                        String email = scanner.nextLine();
+                        System.out.print("Enter phone:");
+                        String phone = scanner.nextLine();
+                        System.out.print("Enter quote:");
+                        String quote = scanner.nextLine();
+                        RedirectApplication.database.insertCardInfo(email,phone,quote,header);
+                    }
+                    else{
+                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT+"Wrong command usage, check help!"+ConsoleColors.RESET);
+                    }
+                    break;
+                }
                 default:
                 {
                     System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT+"No command called ("+user_input+") - check help!" + ConsoleColors.RESET);

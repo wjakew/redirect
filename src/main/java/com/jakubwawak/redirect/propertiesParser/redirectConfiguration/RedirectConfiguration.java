@@ -36,12 +36,11 @@ public class RedirectConfiguration {
     public String redirectBtnText3;
     public String redirectBtnUrl3;
 
-    // database connector
+    // sqlite connector for content
+    public String databasePath;
 
-    public String databaseIP;
-    public String databaseName;
-    public String databaseUser;
-    public String databasePassword;
+    public int cardEnabled;
+    public String qrCodeLink;
 
     // styling values
     public String mainPageBackgroundStyle,mainPageFontColor,mainPageFontStyle,mainPageButtonStyle;
@@ -71,15 +70,15 @@ public class RedirectConfiguration {
         redirectBtnText3 = properties.getValue("redirectBtnText3");
         redirectBtnUrl3 = properties.getValue("redirectBtnUrl3");
 
-        databaseIP = properties.getValue("databaseIP");
-        databaseName = properties.getValue("databaseName");
-        databaseUser = properties.getValue("databaseUser");
-        databasePassword = properties.getValue("databasePassword");
+        databasePath = properties.getValue("databasePath");
 
         mainPageBackgroundStyle = properties.getValue("mainPageBackgroundStyle");
         mainPageFontColor = properties.getValue("mainPageFontColor");
         mainPageFontStyle = properties.getValue("mainPageFontStyle");
         mainPageButtonStyle = properties.getValue("mainPageButtonStyle");
+
+        cardEnabled = Integer.parseInt(properties.getValue("cardEnabled"));
+        qrCodeLink = properties.getValue("qrcodelink");
     }
 
     public String getPageTitleHeader() {
@@ -187,32 +186,11 @@ public class RedirectConfiguration {
         return "https://github.com/wjakew";
     }
 
-    public String getDatabaseIP() {
-        if ( !databaseIP.equals(""))
-            return databaseIP;
-        else
-            return "localhost";
-    }
-
-    public String getDatabaseName() {
-        if ( !databaseName.equals(""))
-            return databaseName;
-        else
-            return "redirect_database";
-    }
-
-    public String getDatabaseUser() {
-        if ( !databaseUser.equals(""))
-            return databaseUser;
-        else
-            return "root";
-    }
-
-    public String getDatabasePassword() {
-        if ( !databasePassword.equals(""))
-            return databasePassword;
-        else
-            return "password";
+    public String getDatabasePath() {
+        if ( !databasePath.equals("")) {
+            return databasePath;
+        }
+        return "redirect.db";
     }
 
     public String getMainPageBackgroundStyle() {

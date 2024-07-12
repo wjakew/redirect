@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Properties {
 
-    int INTEGRITY_CHECK_FLAG = 15;
+    int INTEGRITY_CHECK_FLAG = 18;
     String EXPECTED_FILEVERSION = "1";
 
     String propertiesFile;
@@ -135,6 +135,14 @@ public class Properties {
             writer.write("# 0 - disabled, 1 - enabled\n");
             writer.write("$projectsFlag=0\n");
             writer.write("$blogFlag=0\n");
+            writer.write("#-------------------------------------------------------------\n");
+            writer.write("# your sqlite database path\n");
+            writer.write("$databasePath=\n");
+            writer.write("#-------------------------------------------------------------\n");
+            writer.write("# enable your private card ( 0 - card page is not enabled, 1 - card page is enabled )\n");
+            writer.write("$cardEnabled=\n");
+            writer.write("# qrcode link ( link to the qrcode image, if not set the app will pass it )\n");
+            writer.write("$qrcodelink=\n");
             writer.write("#-------------------------------------------------------------\n");
             writer.write("# redirect buttons\n");
             writer.write("# app can show three main redirect buttons, they can redirect your viewers to other sites or social media\n");

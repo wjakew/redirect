@@ -5,6 +5,7 @@
  */
 package com.jakubwawak.redirect;
 
+import com.jakubwawak.redirect.database.Database;
 import com.jakubwawak.redirect.maintanance.ConsoleColors;
 import com.jakubwawak.redirect.maintanance.JWALog;
 import com.jakubwawak.redirect.propertiesParser.Properties;
@@ -12,7 +13,6 @@ import com.jakubwawak.redirect.propertiesParser.redirectConfiguration.RedirectCo
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.spring.annotation.EnableVaadin;
 import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -26,16 +26,19 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class RedirectApplication extends SpringBootServletInitializer implements AppShellConfigurator{
 
 	public static String version = "v1.0.0";
-	public static String build = "red220424REV01";
+	public static String build = "red120724REV01";
 
 	public static int debug = 0;
 
 	public static JWALog logger;
+	public static int printLogFlag = 1;
 
 	public static Properties properties;
 	public static RedirectConfiguration redirectConfiguration;
 
 	public static RedirectMenu menu;
+
+	public static Database database;
 
 	/**
 	 * Main application function
@@ -63,8 +66,15 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 						// run the server + frontend
 						logger.addLog("INTEGRITY","Properties loaded correctly!");
 						menu = new RedirectMenu();
-						SpringApplication.run(RedirectApplication.class, args);
-						menu.run();
+						if ( redirectConfiguration.databasePath.isBlank()){
+							redirectConfiguration.databasePath = "redirect.db";
+						}
+						database = new Database(redirectConfiguration.databasePath);
+						if (database.connected) {
+							logger.addLog("DATABASE-CONNECTED", "Database connected correctly");
+							SpringApplication.run(RedirectApplication.class, args);
+							menu.run();
+						}
 					}
 					else{
 						logger.addLog("INTEGRITY-FAILED","Failed to check integrity of the file!");

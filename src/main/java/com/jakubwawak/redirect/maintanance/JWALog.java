@@ -5,6 +5,8 @@
  */
 package com.jakubwawak.redirect.maintanance;
 
+import com.jakubwawak.redirect.RedirectApplication;
+
 import java.awt.geom.RectangularShape;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
@@ -45,7 +47,8 @@ public class JWALog {
             String log = logCategory+"-"+LocalDateTime.now().toString()+"-"+logText;
             logCollector.add(log);
             logWritter.write(log+"\n");
-            System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+log+ConsoleColors.RESET);
+            if (RedirectApplication.printLogFlag == 1 )
+                System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+LocalDateTime.now()+" - "+log+ConsoleColors.RESET);
         }catch(Exception ex){
             errorFlag = true;
         }
