@@ -26,7 +26,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class RedirectApplication extends SpringBootServletInitializer implements AppShellConfigurator{
 
 	public static String version = "v1.0.0";
-	public static String build = "red120724REV01";
+	public static String build = "red130724REV01";
 
 	public static int debug = 0;
 

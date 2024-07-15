@@ -12,6 +12,20 @@ html{
     --lumo-primary-color:green;
     overflow: hidden;
 }
+.header{
+    /* style for upper header */
+    background-color: black;
+    color: white;
+    font-family: primary;
+    font-size: 10vw;
+}
+.desc{
+    /* style for upper header description */
+    background-color: black;
+    color: white;
+    font-family: secondary;
+    font-size: 5vw;
+}
 .homeview{
     /* style for main page with headers and buttons /home */
     background-color: black;
