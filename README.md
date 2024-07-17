@@ -16,7 +16,7 @@ POC, currently in development
 - [X] Simple front page with edition functionality.
 - [X] Card creation with custom header, email, phone and quote. Custom QR with link is also available.
 - [ ] Projects page with projects manager in the terminal.
-- [ ] Blog functionality with blog entry importer as Markdown file in terminal.
+- [ ] Blog functionality with blog entry importer as Markdown file.
 - [ ] CV Page functionality with web editor.
 
 ### How to use
@@ -40,3 +40,5 @@ To change the page style (font, background color, etc.) use the CSS file located
 - `exit` Exits the application. **Usage**: `exit`<br>
 - `debug`Toggles the debug mode on or off. **Usage**: `debug`<br>
 - `cardinfomanager` Allows entering card information (header, email, phone, quote) for database insertion. **Usage**: `cardinfomanager`
+- `blogmanager` Enables blog manager web UI. You can find the UI under /blogmanager/<created_key> **Usage**: `blogmanager`
+- `blogmanagerclear` Clears the blog manager cache. **Usage**: `blogmanagerclear`

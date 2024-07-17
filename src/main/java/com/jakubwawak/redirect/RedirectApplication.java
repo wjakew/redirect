@@ -17,6 +17,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Web application for creating redirection page with styling, blog functionality and project viewing
  */
@@ -72,6 +76,7 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 						database = new Database(redirectConfiguration.databasePath);
 						if (database.connected) {
 							logger.addLog("DATABASE-CONNECTED", "Database connected correctly");
+							createDirectoriesIfNotExist(); // create directories for raw data
 							SpringApplication.run(RedirectApplication.class, args);
 							menu.run();
 						}
@@ -105,4 +110,26 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 		System.out.println(ConsoleColors.GREEN_BOLD+header+ConsoleColors.RESET);
 	}
 
+	/**
+	 * Function for creating directories for raw data of project and blog posts if not exist
+
+	 */
+	public static void createDirectoriesIfNotExist() {
+		Path projectsRawPath = Paths.get("projects_raw");
+		Path blogRawPath = Paths.get("blog_raw");
+
+		try {
+			if (!Files.exists(projectsRawPath)) {
+				Files.createDirectory(projectsRawPath);
+				System.out.println("Created directory: projects_raw");
+			}
+
+			if (!Files.exists(blogRawPath)) {
+				Files.createDirectory(blogRawPath);
+				System.out.println("Created directory: blog_raw");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -6,6 +6,7 @@
 package com.jakubwawak.redirect.database;
 
 import com.jakubwawak.redirect.RedirectApplication;
+import com.jakubwawak.redirect.maintanance.RandomWordGeneratorEngine;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -47,10 +48,11 @@ public class Database {
      */
     public void createTables() {
         createCardInfoTable();
+        createBlogManagerTable();
     }
 
     /**
-     * Method for closing the connection to the database
+     * Method for creating card info table
      */
     private void createCardInfoTable(){
         String sqlCreateTable = "CREATE TABLE IF NOT EXISTS personal_card_info (" +
@@ -58,6 +60,24 @@ public class Database {
                 "phone TEXT NOT NULL," +
                 "quote TEXT NOT NULL," +
                 "header TEXT NOT NULL);";
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute(sqlCreateTable);
+            System.out.println("Tables created/verified successfully.");
+            RedirectApplication.logger.addLog("DB-TABLE-CREATION", "Tables created/verified successfully.");
+        } catch (SQLException e) {
+            System.out.println("Failed to create/verify tables in the database.");
+            RedirectApplication.logger.addLog("DB-TABLE-CREATION-FAILED", "Failed to create/verify tables in the database (" + e.toString() + ")");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method for creating blog manager data table
+     */
+    private void createBlogManagerTable(){
+        String sqlCreateTable = "CREATE TABLE IF NOT EXISTS blog_manager_data (" +
+                "blog_manager_key TEXT NOT NULL);";
         try {
             Statement stmt = connection.createStatement();
             stmt.execute(sqlCreateTable);
@@ -143,6 +163,69 @@ public class Database {
             e.printStackTrace();
         }
         return data;
+    }
+
+    /**
+     * Function for enabling blog manager in the database
+     * @return String
+     */
+    public String enableBlogManager(){
+        String query = "DELETE FROM BLOG_MANAGER_DATA;";
+        try{
+            Statement stmt = connection.createStatement();
+            stmt.execute(query);
+            RedirectApplication.logger.addLog("DB-BLOG-MANAGER-ENABLE","Enabling blog manager in the database");
+            RandomWordGeneratorEngine rwge = new RandomWordGeneratorEngine();
+            query = "INSERT INTO BLOG_MANAGER_DATA (blog_manager_key) VALUES (?);";
+            PreparedStatement ppst = connection.prepareStatement(query);
+            String key = rwge.generateRandomString(50,true,false);
+            ppst.setString(1,key);
+            ppst.execute();
+            return key;
+        } catch (SQLException e){
+            RedirectApplication.logger.addLog("DB-BLOG-MANAGER-ENABLE-FAILED","Failed to enable blog manager in the database ("+e.toString()+")");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Function for verifying blog manager key in the database
+     * @param blogKeyProvided
+     * @return boolean
+     */
+    public boolean verifyBlogKey(String blogKeyProvided){
+        String query = "SELECT * FROM BLOG_MANAGER_DATA;";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String blogKey = rs.getString("blog_manager_key");
+                if(blogKey.equals(blogKeyProvided)){
+                    RedirectApplication.logger.addLog("DB-BLOG-MANAGER-VERIFY", "Blog manager key verified");
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException e) {
+            RedirectApplication.logger.addLog("DB-BLOG-MANAGER-VERIFY-FAILED", "Failed to verify blog manager key (" + e.toString() + ")");
+            e.printStackTrace();
+            return false;
+    }
+}
+
+    /**
+     * Function for clearing blog manager in the database
+     */
+    public void clearBlogManager(){
+        String query = "DELETE FROM BLOG_MANAGER_DATA;";
+        try{
+            Statement stmt = connection.createStatement();
+            stmt.execute(query);
+            RedirectApplication.logger.addLog("DB-BLOG-MANAGER-CLEAR","Clearing blog manager in the database");
+        } catch (SQLException e){
+            RedirectApplication.logger.addLog("DB-BLOG-MANAGER-CLEAR-FAILED","Failed to clear blog manager in the database ("+e.toString()+")");
+            e.printStackTrace();
+        }
     }
 
 }

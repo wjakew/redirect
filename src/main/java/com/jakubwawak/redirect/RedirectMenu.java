@@ -33,33 +33,28 @@ public class RedirectMenu {
     void mind(String user_input){
         String[] words = user_input.split(" ");
         for( String word : words ){
-            switch(word){
-                case "exit":
-                {
-                    if ( words.length == 1 ){
+            switch(word) {
+                case "exit": {
+                    if (words.length == 1) {
                         System.out.println("Application exiting..");
                         RedirectApplication.logger.closeFile();
                         System.exit(0);
-                    }
-                    else{
-                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT+"Wrong command usage, check help!"+ConsoleColors.RESET);
+                    } else {
+                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Wrong command usage, check help!" + ConsoleColors.RESET);
                     }
                     break;
                 }
-                case "debug":
-                {
-                    if ( RedirectApplication.printLogFlag == 1 ){
+                case "debug": {
+                    if (RedirectApplication.printLogFlag == 1) {
                         RedirectApplication.printLogFlag = 0;
                         System.out.println("Debug mode off");
-                    }
-                    else {
+                    } else {
                         RedirectApplication.printLogFlag = 1;
                         System.out.println("Debug mode on");
                     }
                 }
-                case "cardinfomanager":
-                {
-                    if ( words.length == 1 ){
+                case "cardinfomanager": {
+                    if (words.length == 1) {
                         Scanner scanner = new Scanner(System.in);
                         System.out.print("Enter header:");
                         String header = scanner.nextLine();
@@ -69,16 +64,37 @@ public class RedirectMenu {
                         String phone = scanner.nextLine();
                         System.out.print("Enter quote:");
                         String quote = scanner.nextLine();
-                        RedirectApplication.database.insertCardInfo(email,phone,quote,header);
-                    }
-                    else{
-                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT+"Wrong command usage, check help!"+ConsoleColors.RESET);
+                        RedirectApplication.database.insertCardInfo(email, phone, quote, header);
+                    } else {
+                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Wrong command usage, check help!" + ConsoleColors.RESET);
                     }
                     break;
                 }
-                default:
+                default: {
+                    System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT + "No command called (" + user_input + ") - check help!" + ConsoleColors.RESET);
+                    break;
+                }
+                case "blogmanager": {
+                    if (words.length == 1) {
+                        String key = RedirectApplication.database.enableBlogManager();
+                        if (key != null) {
+                            System.out.println("Blog manager enabled, key: " + key);
+                        } else {
+                            System.out.println("Failed to enable blog manager");
+                        }
+                    } else {
+                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Wrong command usage, check help!" + ConsoleColors.RESET);
+                    }
+                    break;
+                }
+                case "blogmanagerclear":
                 {
-                    System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT+"No command called ("+user_input+") - check help!" + ConsoleColors.RESET);
+                    if (words.length == 1){
+                        RedirectApplication.database.clearBlogManager();
+                    }
+                    else{
+                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Wrong command usage, check help!" + ConsoleColors.RESET);
+                    }
                     break;
                 }
             }
