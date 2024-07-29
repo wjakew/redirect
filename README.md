@@ -9,7 +9,7 @@ Web application for creating personal redirection pages. Using Java/Spring-Boot/
 
 ### Current application state:
 
-POC, currently in development
+POC, currently in development - **development suspended due to other projects.**
 
 <u>Features:</u>
 

@@ -30,7 +30,7 @@ import java.nio.file.Paths;
 public class RedirectApplication extends SpringBootServletInitializer implements AppShellConfigurator{
 
 	public static String version = "v1.0.0";
-	public static String build = "red130724REV01";
+	public static String build = "red240724REV01";
 
 	public static int debug = 0;
 
