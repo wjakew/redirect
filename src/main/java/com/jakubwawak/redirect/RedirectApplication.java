@@ -8,6 +8,7 @@ package com.jakubwawak.redirect;
 import com.jakubwawak.redirect.database.Database;
 import com.jakubwawak.redirect.maintanance.ConsoleColors;
 import com.jakubwawak.redirect.maintanance.JWALog;
+import com.jakubwawak.redirect.maintanance.RandomWordGeneratorEngine;
 import com.jakubwawak.redirect.propertiesParser.Properties;
 import com.jakubwawak.redirect.propertiesParser.redirectConfiguration.RedirectConfiguration;
 import com.vaadin.flow.component.page.AppShellConfigurator;
@@ -30,7 +31,9 @@ import java.nio.file.Paths;
 public class RedirectApplication extends SpringBootServletInitializer implements AppShellConfigurator{
 
 	public static String version = "v1.0.0";
-	public static String build = "red240724REV01";
+	public static String build = "red020924REV01";
+
+	public static String singlePassword;
 
 	public static int debug = 0;
 
@@ -50,6 +53,10 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 	 */
 	public static void main(String[] args) {
 		showHeader();
+		RandomWordGeneratorEngine rwge = new RandomWordGeneratorEngine();
+
+		singlePassword = rwge.generateRandomString(30,true,true);
+
 		logger = new JWALog("redirect");
 		if ( args.length == 0 ){
 			// no arguments - start the server normally
@@ -76,6 +83,7 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 						database = new Database(redirectConfiguration.databasePath);
 						if (database.connected) {
 							logger.addLog("DATABASE-CONNECTED", "Database connected correctly");
+							logger.addLog("SINGLE-ADMIN-PASSWORD", "One Time password for admin: " + singlePassword);
 							createDirectoriesIfNotExist(); // create directories for raw data
 							SpringApplication.run(RedirectApplication.class, args);
 							menu.run();

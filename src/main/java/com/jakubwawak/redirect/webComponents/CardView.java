@@ -47,51 +47,57 @@ public class CardView extends VerticalLayout {
      * Function for preparing components
      */
     void prepareComponents(){
+        ArrayList<String> data = RedirectApplication.database.getCardInfo();
         mainComponent = new VerticalLayout();
         mainComponent.addClassName("cardlayout");
         mainComponent.setJustifyContentMode(JustifyContentMode.CENTER);
         mainComponent.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        HorizontalLayout mainHorizontalLayout = new HorizontalLayout();
-        mainHorizontalLayout.setSizeFull();
-        mainHorizontalLayout.setAlignItems(Alignment.CENTER);
-        mainHorizontalLayout.setVerticalComponentAlignment(Alignment.CENTER);
+        if (data.isEmpty()){
+            mainComponent.add(new H1("No card data set!"));
+            mainComponent.add(new H6("Please set the card data in the database"));
+        }
+        else{
 
-        ArrayList<String> data = RedirectApplication.database.getCardInfo();
+            HorizontalLayout mainHorizontalLayout = new HorizontalLayout();
+            mainHorizontalLayout.setSizeFull();
+            mainHorizontalLayout.setAlignItems(Alignment.CENTER);
+            mainHorizontalLayout.setVerticalComponentAlignment(Alignment.CENTER);
 
-        VerticalLayout leftLayout = new VerticalLayout();
-        leftLayout.setSizeFull();
-        leftLayout.setJustifyContentMode(JustifyContentMode.CENTER);
-        leftLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+            VerticalLayout leftLayout = new VerticalLayout();
+            leftLayout.setSizeFull();
+            leftLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+            leftLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        VerticalLayout photo = new VerticalLayout();
-        photo.addClassName("cardlayout");
-        photo.setWidthFull();photo.setHeight("50%");
+            VerticalLayout photo = new VerticalLayout();
+            photo.addClassName("cardlayout");
+            photo.setWidthFull();photo.setHeight("50%");
 
-        try {
-            if ( !RedirectApplication.redirectConfiguration.qrCodeLink.isBlank() ){
-                StreamResource qrCodeResource = generateQRCodeStreamResource(RedirectApplication.redirectConfiguration.qrCodeLink, 512, 512);
-                Image qrCodeImage = new Image(qrCodeResource, "QR Code");
-                // Set the image size to 100% to make it responsive and fit the parent layout
-                qrCodeImage.setWidth("100%");
-                qrCodeImage.setHeight("100%");
-                photo.add(qrCodeImage); // Assuming mainComponent is your VerticalLayout
-            }
-        } catch (Exception e) {}
+            try {
+                if ( !RedirectApplication.redirectConfiguration.qrCodeLink.isBlank() ){
+                    StreamResource qrCodeResource = generateQRCodeStreamResource(RedirectApplication.redirectConfiguration.qrCodeLink, 512, 512);
+                    Image qrCodeImage = new Image(qrCodeResource, "QR Code");
+                    // Set the image size to 100% to make it responsive and fit the parent layout
+                    qrCodeImage.setWidth("100%");
+                    qrCodeImage.setHeight("100%");
+                    photo.add(qrCodeImage); // Assuming mainComponent is your VerticalLayout
+                }
+            } catch (Exception e) {}
 
-        leftLayout.add(photo,new H1("card"));
+            leftLayout.add(photo,new H1("card"));
 
-        VerticalLayout rightLayout = new VerticalLayout();
-        rightLayout.setSizeFull();
-        rightLayout.setJustifyContentMode(JustifyContentMode.CENTER);
-        rightLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+            VerticalLayout rightLayout = new VerticalLayout();
+            rightLayout.setSizeFull();
+            rightLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+            rightLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        rightLayout.add(new H1(data.get(3)));
-        rightLayout.add(new H6(data.get(0)));
-        rightLayout.add(new H4(data.get(1)));
+            rightLayout.add(new H1(data.get(3)));
+            rightLayout.add(new H6(data.get(0)));
+            rightLayout.add(new H4(data.get(1)));
 
-        mainHorizontalLayout.add(leftLayout,rightLayout);
-        mainComponent.add(mainHorizontalLayout);
+            mainHorizontalLayout.add(leftLayout,rightLayout);
+            mainComponent.add(mainHorizontalLayout);
+        }
     }
 
     /**
@@ -103,7 +109,12 @@ public class CardView extends VerticalLayout {
 
         if (RedirectApplication.properties.getValue("cardEnabled").equals("1")){
             // create card
-            add(new H6(data.get(2)));
+            if ( !data.isEmpty() ){
+                add(new H6(data.get(2)));
+            }
+            else{
+                add(new H1("No card data set!"));
+            }
             add(mainComponent);
             add(new H6("created using redirect"));
         }

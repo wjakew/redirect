@@ -7,6 +7,14 @@
   font-family: secondary;
   src: url("./Tiny5-Regular.ttf");
 }
+H1{
+    font-family: secondary;
+    color: primary;
+}
+H6{
+    font-family: secondary;
+    color: white;
+}
 html{
     /* style for whole web application */
     --lumo-primary-color:green;
@@ -76,6 +84,19 @@ vaadin-button {
     /* styles for application redirect buttons */
     font-family: secondary;
 }
+vaadin-button {
+    color: white;
+    background-color: black;
+    border-radius: 25px;
+    border: white 1px solid;
+}
+.input{
+    --vaadin-input-field-background: black;
+    --vaadin-input-field-border-width: 1px;
+    --vaadin-input-field-border-color: white;
+    --vaadin-input-field-value-color: white;
+    --vaadin-input-field-label-color: white;
+}
 .footer{
     /* style for lower footer */
     position: relative;
@@ -90,3 +111,24 @@ vaadin-button {
     height: 60%;
     border-radius: 25px;
 }
+
+.window::part(overlay){
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    border-color: white;
+    border-style: solid;
+}
+.window::part(backdrop){
+     background-color: transparent;
+ }
+ .window-white::part(overlay){
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+}
+.window-white::part(backdrop){
+     background-color: transparent;
+ }

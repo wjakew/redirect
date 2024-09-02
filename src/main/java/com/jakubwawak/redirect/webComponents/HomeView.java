@@ -7,6 +7,7 @@ package com.jakubwawak.redirect.webComponents;
 
 import com.jakubwawak.redirect.RedirectApplication;
 import com.jakubwawak.redirect.propertiesParser.redirectConfiguration.RedirectConfiguration;
+import com.jakubwawak.redirect.webComponents.windows.PasswordWindow;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
@@ -76,6 +77,12 @@ public class HomeView extends VerticalLayout {
         iconImage = new Image(res,"redirect_logo");
         iconImage.setHeight("5rem");
         iconImage.setWidth("5rem");
+
+        iconImage.addClickListener(e->{
+            PasswordWindow pw = new PasswordWindow();
+            add(pw.main_dialog);
+            pw.main_dialog.open();
+        });
 
         blogButton = new Button("Blog", VaadinIcon.BOOK.create());
         blogButton.addClassName("redirectbtn");
