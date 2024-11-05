@@ -53,9 +53,6 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 	 */
 	public static void main(String[] args) {
 		showHeader();
-		RandomWordGeneratorEngine rwge = new RandomWordGeneratorEngine();
-
-		singlePassword = rwge.generateRandomString(30,true,true);
 
 		logger = new JWALog("redirect");
 		if ( args.length == 0 ){
@@ -83,7 +80,6 @@ public class RedirectApplication extends SpringBootServletInitializer implements
 						database = new Database(redirectConfiguration.databasePath);
 						if (database.connected) {
 							logger.addLog("DATABASE-CONNECTED", "Database connected correctly");
-							logger.addLog("SINGLE-ADMIN-PASSWORD", "One Time password for admin: " + singlePassword);
 							createDirectoriesIfNotExist(); // create directories for raw data
 							SpringApplication.run(RedirectApplication.class, args);
 							menu.run();

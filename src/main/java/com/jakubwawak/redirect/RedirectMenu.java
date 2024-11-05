@@ -6,6 +6,7 @@ all rights reserved
 package com.jakubwawak.redirect;
 
 import com.jakubwawak.redirect.maintanance.ConsoleColors;
+import com.jakubwawak.redirect.maintanance.RandomWordGeneratorEngine;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -74,27 +75,16 @@ public class RedirectMenu {
                     System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT + "No command called (" + user_input + ") - check help!" + ConsoleColors.RESET);
                     break;
                 }
-                case "blogmanager": {
-                    if (words.length == 1) {
-                        String key = RedirectApplication.database.enableBlogManager();
-                        if (key != null) {
-                            System.out.println("Blog manager enabled, key: " + key);
-                        } else {
-                            System.out.println("Failed to enable blog manager");
-                        }
-                    } else {
-                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Wrong command usage, check help!" + ConsoleColors.RESET);
-                    }
+                case "startadminpanel":{
+                    RandomWordGeneratorEngine rwge = new RandomWordGeneratorEngine();
+                    RedirectApplication.singlePassword = rwge.generateRandomString(30,true,false);
+                    System.out.println("Admin panel password: "+RedirectApplication.singlePassword);
+                    System.out.println("To open the admin panel go to url: /admin/"+RedirectApplication.singlePassword);
                     break;
                 }
-                case "blogmanagerclear":
-                {
-                    if (words.length == 1){
-                        RedirectApplication.database.clearBlogManager();
-                    }
-                    else{
-                        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Wrong command usage, check help!" + ConsoleColors.RESET);
-                    }
+                case "stopadminpanel":{
+                    RedirectApplication.singlePassword = "";
+                    System.out.println("Admin panel stopped");
                     break;
                 }
             }
